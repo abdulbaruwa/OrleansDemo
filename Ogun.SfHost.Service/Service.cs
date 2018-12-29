@@ -50,6 +50,13 @@ namespace Ogun.SfHost.Service
                         logging.AddDebug();
                     });
 
+                    builder.UseDashboard(options =>
+                    {
+                        options.Port = 8082;
+                        options.Host = "*";
+                        options.HostSelf = true;
+                    });
+
                     // As SF manages port allocation, use the ports defined.
                     var activation = sfContext.CodePackageActivationContext;
                     var endpoints = activation.GetEndpoints();
