@@ -42,7 +42,7 @@ namespace Ogun.SfClient.Service
                                         services => services
                                             .AddSingleton<StatelessServiceContext>(serviceContext))
                                     .UseContentRoot(Directory.GetCurrentDirectory())
-                                    .UseStartup<Startup>()
+                                    .UseStartup<ServiceFabricStartup>()
                                     .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)
                                     .UseUrls(url)
                                     .Build();
