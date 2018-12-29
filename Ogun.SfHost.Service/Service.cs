@@ -37,6 +37,8 @@ namespace Ogun.SfHost.Service
                         options.ClusterId = "dev";
                     });
 
+                    builder.AddAzureTableGrainStorage("GloballySharedAzureAccount",
+                        options => options.ConnectionString = "UseDevelopmentStorage=true");
 
                     // Configure Azure storage as the clustering provider. Could use sql in the future.
                     builder.UseAzureStorageClustering(

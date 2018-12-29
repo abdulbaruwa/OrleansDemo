@@ -12,6 +12,13 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
     <PackageReference Include="Microsoft.Orleans.Client" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.OrleansCodeGenerator.Build" Version="2.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 

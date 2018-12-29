@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orleans;
+using Orleans.Hosting;
 using Orleans.Configuration;
 using Swashbuckle.AspNetCore.Swagger;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Ogun.Client
 {
@@ -59,7 +61,6 @@ namespace Ogun.Client
         {
             while (true)
             {
-
                 var clientBuilder = new ClientBuilder()
                     .UseLocalhostClustering()
                     .Configure<ClusterOptions>(options =>
@@ -80,6 +81,28 @@ namespace Ogun.Client
 
                 return client;
             }
+        } private IClusterClient CreateOrleansClientSf()
+        {
+            var serviceName = new Uri("");
+            var clientBuilder = new ClientBuilder()
+                .UseAzureStorageClustering(options => options.ConnectionString="UseDevelopmentStorage=true")
+                .Configure<ClusterOptions>(options =>
+                {
+                    options.ServiceId = serviceName.ToString();
+                    options.ClusterId = "dev";
+                })
+                .ConfigureLogging(logging => logging.AddDebug());
+                var client = clientBuilder.Build();
+
+                client.Connect(async exception =>
+                {
+                    Console.WriteLine(exception);
+                    Console.WriteLine("retrying....");
+                    await Task.Delay(2000);
+                    return true;
+                }).Wait();
+
+                return client;
         }
     }
 }
