@@ -17,17 +17,17 @@ namespace Ogun.GrainImplementations
             return Task.CompletedTask;
         }
 
-        public Task<List<Guid>> GetAccounts()
+        public Task<List<Guid>> GetAccountsAsync()
         {
             return Task.FromResult(this.State.Accounts.ToList());
         }
 
-        public Task<Customer> GetDetails()
+        public Task<Customer> GetDetailsAsync()
         {
             return Task.FromResult(new Customer(this.State.Name));
         }
 
-        public Task AddAccount(Guid account)
+        public Task AddAccountAsync(Guid account)
         {
             return Task.FromResult(RaiseConditionalEvent(new AddAccountEvent(account)));
         }

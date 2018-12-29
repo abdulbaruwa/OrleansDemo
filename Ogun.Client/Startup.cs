@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Orleans;
 using Orleans.Configuration;
 
@@ -27,6 +23,9 @@ namespace Ogun.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var orleansClient = CreateOrleansClient();
+            services.AddSingleton<IClusterClient>(orleansClient);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -48,25 +47,29 @@ namespace Ogun.Client
 
         private IClusterClient CreateOrleansClient()
         {
-            var clientBuilder = new ClientBuilder()
-                .UseLocalhostClustering()
-                .Configure<ClusterOptions>(options =>
-                {
-                    options.ServiceId = "Ogun";
-                    options.ClusterId = "dev";
-                })
-                .ConfigureLogging(logging => logging.AddConsole());
-            var client = clientBuilder.Build();
-
-            client.Connect(async exception =>
+            while (true)
             {
-                Console.WriteLine(exception);
-                Console.WriteLine("retrying....");
-                await Task.Delay(2000);
-                return true;
-            }).Wait();
 
-            return client;
+                var clientBuilder = new ClientBuilder()
+                    .UseLocalhostClustering()
+                    .Configure<ClusterOptions>(options =>
+                    {
+                        options.ServiceId = "Ogun";
+                        options.ClusterId = "dev";
+                    })
+                    .ConfigureLogging(logging => logging.AddConsole());
+                var client = clientBuilder.Build();
+
+                client.Connect(async exception =>
+                {
+                    Console.WriteLine(exception);
+                    Console.WriteLine("retrying....");
+                    await Task.Delay(2000);
+                    return true;
+                }).Wait();
+
+                return client;
+            }
         }
     }
 }

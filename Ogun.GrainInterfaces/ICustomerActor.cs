@@ -10,28 +10,32 @@ namespace Ogun.GrainInterfaces
     public interface ICustomerActor : IGrainWithIntegerKey
     {
         Task NewAsync(Customer customer);
-        Task<List<Guid>> GetAccounts();
-        Task<Customer> GetDetails();
-        Task AddAccount(Guid account);
+        Task<List<Guid>> GetAccountsAsync();
+        Task<Customer> GetDetailsAsync();
+        Task AddAccountAsync(Guid account);
     }
 
     public class NewCustomerRequest
     {
         public string Name { get; set; }
+        public int Id { get; set; }
     }
 
     [Serializable, Immutable]
     public class Customer
     {
-        public Customer(string name)
+        public Customer(int id, string name)
         {
             Name = name;
+            Id = id;
             Accounts = new HashSet<Guid>();
         }
 
+        public int Id { get; set; }
         public string Name { get; }
         public HashSet<Guid> Accounts{get;}
     }
+
     [Serializable, Immutable]
     public class CustomerState
     {
