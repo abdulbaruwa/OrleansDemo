@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Orleans;
+using Orleans.Configuration;
 
 namespace Ogun.Client
 {
@@ -42,6 +44,29 @@ namespace Ogun.Client
 
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private IClusterClient CreateOrleansClient()
+        {
+            var clientBuilder = new ClientBuilder()
+                .UseLocalhostClustering()
+                .Configure<ClusterOptions>(options =>
+                {
+                    options.ServiceId = "Ogun";
+                    options.ClusterId = "dev";
+                })
+                .ConfigureLogging(logging => logging.AddConsole());
+            var client = clientBuilder.Build();
+
+            client.Connect(async exception =>
+            {
+                Console.WriteLine(exception);
+                Console.WriteLine("retrying....");
+                await Task.Delay(2000);
+                return true;
+            }).Wait();
+
+            return client;
         }
     }
 }
