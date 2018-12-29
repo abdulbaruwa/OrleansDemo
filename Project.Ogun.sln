@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ogun.GrainInterfaces", "Ogun.GrainInterfaces\Ogun.GrainInterfaces.csproj", "{792F287F-C5E5-42F5-B969-7D21387E8429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogun.GrainImplementations", "Ogun.GrainImplementations\Ogun.GrainImplementations.csproj", "{45AE439D-AF00-4DB9-A3E4-D0F66452D25A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ogun.GrainImplementations", "Ogun.GrainImplementations\Ogun.GrainImplementations.csproj", "{45AE439D-AF00-4DB9-A3E4-D0F66452D25A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ogun.SiloHost", "Ogun.SiloHost\Ogun.SiloHost.csproj", "{78F17408-477C-4E54-95A3-31B89E38B9C3}"
 EndProject
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceFabric", "ServiceFab
 EndProject
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Ogun.SfHost", "Ogun.SfHost\Ogun.SfHost.sfproj", "{ECD6F8F1-BEE3-4FE6-AAE6-0079EA4CDB49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogun.SfHost.Service", "Ogun.SfHost.Service\Ogun.SfHost.Service.csproj", "{6C3B19C7-D2DF-4E97-AC51-8BED259474AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ogun.SfHost.Service", "Ogun.SfHost.Service\Ogun.SfHost.Service.csproj", "{6C3B19C7-D2DF-4E97-AC51-8BED259474AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
