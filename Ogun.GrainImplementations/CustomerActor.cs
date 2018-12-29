@@ -13,7 +13,7 @@ namespace Ogun.GrainImplementations
     {
         public Task NewAsync(Customer customer)
         {
-             RaiseConditionalEvent(new NewCustomerEvent(customer.Name));
+             RaiseConditionalEvent(new NewCustomerEvent(customer.Id, customer.Name));
             return Task.CompletedTask;
         }
 
@@ -24,7 +24,7 @@ namespace Ogun.GrainImplementations
 
         public Task<Customer> GetDetailsAsync()
         {
-            return Task.FromResult(new Customer(this.State.Name));
+            return Task.FromResult(new Customer(this.State.Id, this.State.Name));
         }
 
         public Task AddAccountAsync(Guid account)

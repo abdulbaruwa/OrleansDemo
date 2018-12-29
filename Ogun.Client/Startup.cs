@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Configuration;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Ogun.Client
 {
@@ -25,7 +26,11 @@ namespace Ogun.Client
         {
             var orleansClient = CreateOrleansClient();
             services.AddSingleton<IClusterClient>(orleansClient);
-
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info(){Title = "Ogun API", Version = "v1"});
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -41,6 +46,11 @@ namespace Ogun.Client
                 app.UseHsts();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json","Ogun API V1");
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
         }

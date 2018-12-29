@@ -46,10 +46,12 @@ namespace Ogun.GrainInterfaces
 
         public string Name { get; private set; }
         public HashSet<Guid> Accounts{get;}
+        public int Id { get; set; }
 
         public void Apply(NewCustomerEvent @event)
         {
             this.Name = @event.Name;
+            this.Id = @event.Id;
         }
 
         public void Apply(AddAccountEvent @event)
@@ -71,11 +73,13 @@ namespace Ogun.GrainInterfaces
     }
     [Serializable, Immutable]
     public class NewCustomerEvent{
-        public NewCustomerEvent(string name)
+        public NewCustomerEvent(int id, string name)
         {
+            Id = id;
             Name = name;
         }
 
+        public int Id { get; private set; }
         public string Name { get; private set; }
     }
 }
