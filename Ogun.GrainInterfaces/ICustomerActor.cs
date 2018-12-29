@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Orleans;
+using Orleans.Concurrency;
 
 namespace Ogun.GrainInterfaces
 {
@@ -19,7 +20,7 @@ namespace Ogun.GrainInterfaces
         public string Name { get; set; }
     }
 
-    [Serializable]
+    [Serializable, Immutable]
     public class Customer
     {
         public Customer(string name)
@@ -30,5 +31,47 @@ namespace Ogun.GrainInterfaces
 
         public string Name { get; }
         public HashSet<Guid> Accounts{get;}
+    }
+    [Serializable, Immutable]
+    public class CustomerState
+    {
+        public CustomerState()
+        {
+            Accounts = new HashSet<Guid>();
+        }
+
+        public string Name { get; private set; }
+        public HashSet<Guid> Accounts{get;}
+
+        public void Apply(NewCustomerEvent @event)
+        {
+            this.Name = @event.Name;
+        }
+
+        public void Apply(AddAccountEvent @event)
+        {
+            this.Accounts.Add(@event.Account);
+        }
+    }
+
+    [Serializable, Immutable]
+    public class AddAccountEvent
+    {
+        public AddAccountEvent(Guid account)
+        {
+            Account = account;
+        }
+
+        public Guid Account { get; private set; }
+
+    }
+    [Serializable, Immutable]
+    public class NewCustomerEvent{
+        public NewCustomerEvent(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; private set; }
     }
 }

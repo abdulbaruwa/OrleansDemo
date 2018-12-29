@@ -1,31 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Ogun.GrainInterfaces;
-using Orleans;
+using Orleans.EventSourcing;
+using Orleans.Providers;
 
 namespace Ogun.GrainImplementations
 {
-    public class CustomerActor : Grain, ICustomerActor
+    [StorageProvider(ProviderName = "GloballySharedAzureAccount")]
+    public class CustomerActor : JournaledGrain<CustomerState>, ICustomerActor
     {
         public Task NewAsync(Customer customer)
         {
-            throw new NotImplementedException();
+             RaiseConditionalEvent(new NewCustomerEvent(customer.Name));
+            return Task.CompletedTask;
         }
 
         public Task<List<Guid>> GetAccounts()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(this.State.Accounts.ToList());
         }
 
         public Task<Customer> GetDetails()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new Customer(this.State.Name));
         }
 
         public Task AddAccount(Guid account)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(RaiseConditionalEvent(new AddAccountEvent(account)));
         }
     }
 }

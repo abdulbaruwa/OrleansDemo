@@ -48,6 +48,7 @@ namespace Ogun.SiloHost
                 {
                     parts.AddApplicationPart(typeof(CustomerActor).Assembly).WithReferences();
                 })
+                .AddAzureTableGrainStorage("GloballySharedAzureAccount", options=> options.ConnectionString="UseDevelopmentStorage=true")
                 .ConfigureLogging(logging => logging.AddConsole());
 
             var host = builder.Build();
