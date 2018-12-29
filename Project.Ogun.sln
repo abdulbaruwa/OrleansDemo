@@ -17,6 +17,8 @@ Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Ogun.SfHost", "Ogun.SfHost\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ogun.SfHost.Service", "Ogun.SfHost.Service\Ogun.SfHost.Service.csproj", "{6C3B19C7-D2DF-4E97-AC51-8BED259474AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogun.SfClient.Service", "Ogun.SfClient.Service\Ogun.SfClient.Service.csproj", "{33203561-915B-4A77-B3EE-ADA020D5525D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{6C3B19C7-D2DF-4E97-AC51-8BED259474AA}.Release|x64.Build.0 = Release|Any CPU
 		{6C3B19C7-D2DF-4E97-AC51-8BED259474AA}.Release|x86.ActiveCfg = Release|Any CPU
 		{6C3B19C7-D2DF-4E97-AC51-8BED259474AA}.Release|x86.Build.0 = Release|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Debug|x64.Build.0 = Debug|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Debug|x86.Build.0 = Debug|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Release|x64.ActiveCfg = Release|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Release|x64.Build.0 = Release|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Release|x86.ActiveCfg = Release|Any CPU
+		{33203561-915B-4A77-B3EE-ADA020D5525D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +118,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{ECD6F8F1-BEE3-4FE6-AAE6-0079EA4CDB49} = {2879B51A-671E-4693-83BB-8632DE20A999}
 		{6C3B19C7-D2DF-4E97-AC51-8BED259474AA} = {2879B51A-671E-4693-83BB-8632DE20A999}
+		{33203561-915B-4A77-B3EE-ADA020D5525D} = {2879B51A-671E-4693-83BB-8632DE20A999}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17F9CD72-58D5-45C4-B391-6CD8F493A2E5}

@@ -32,6 +32,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ogun.SfClient.Service\Ogun.SfClient.Service.csproj" />
     <ProjectReference Include="..\Ogun.SfHost.Service\Ogun.SfHost.Service.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
