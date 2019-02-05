@@ -92,7 +92,8 @@ namespace Ogun.Client
                     options.ClusterId = "dev";
                 })
                 .ConfigureLogging(logging => logging.AddDebug());
-                var client = clientBuilder.Build();
+                var client = clientBuilder.
+                    Build();
 
                 client.Connect(async exception =>
                 {

@@ -38,6 +38,7 @@ namespace Ogun.SiloHost
         {
             var builder = new SiloHostBuilder()
                 .UseLocalhostClustering()
+                .UseDashboard(options => { })
                 .Configure<ClusterOptions>(options =>
                 {
                     options.ClusterId = "dev";

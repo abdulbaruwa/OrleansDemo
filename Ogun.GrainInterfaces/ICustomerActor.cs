@@ -71,6 +71,7 @@ namespace Ogun.GrainInterfaces
         public Guid Account { get; private set; }
 
     }
+
     [Serializable, Immutable]
     public class NewCustomerEvent{
         public NewCustomerEvent(int id, string name)

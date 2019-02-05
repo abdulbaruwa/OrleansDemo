@@ -12,6 +12,6 @@ namespace Ogun.Client
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<ServiceFabricStartup>();
+                .UseStartup<Startup>();
     }
 }
