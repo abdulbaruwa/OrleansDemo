@@ -4,11 +4,8 @@ using Orleans;
 
 namespace Ogun.GrainInterfaces
 {
-    public interface IFourEyeManager : IGrain
+    public interface IFourEyeActor : IGrainWithIntegerKey
     {
         Task NewAsync(FourEyeRequest fourEyeRequest);
-        Task<FourEyeRequest> GetAllRequestsAsync();
     }
-
-   
 }
