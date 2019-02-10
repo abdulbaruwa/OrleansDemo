@@ -9,4 +9,10 @@
     <PackageReference Include="Microsoft.Orleans.OrleansCodeGenerator.Build" Version="*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\Users\abdul\.nuget\packages\microsoft.csharp\4.3.0\ref\netstandard1.0\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

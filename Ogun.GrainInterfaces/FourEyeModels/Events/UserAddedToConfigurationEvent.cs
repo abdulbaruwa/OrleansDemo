@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ogun.GrainInterfaces.FourEyeModels
+namespace Ogun.GrainInterfaces.FourEyeModels.Events
 {
     public class UserAddedToConfigurationEvent
     {

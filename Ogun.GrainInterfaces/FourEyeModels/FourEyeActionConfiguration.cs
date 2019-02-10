@@ -20,6 +20,7 @@ namespace Ogun.GrainInterfaces.FourEyeModels
 
             Approvers.Add(@event.Id);
         }
+
         public void Apply(InstitutionAddedToConfigurationEvent @event)
         {
             if (Institutions == null)
