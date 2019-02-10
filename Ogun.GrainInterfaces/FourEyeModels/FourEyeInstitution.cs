@@ -21,10 +21,8 @@ namespace Ogun.GrainInterfaces.FourEyeModels
 
         public FourEyeInstitution()
         {
-            if (Approvers == null)
-            {
-                Approvers = new HashSet<Guid>();
-            }
+            Approvers = new HashSet<Guid>();
+            Changes = new List<DomainEvent<IDomainEventEntity>>();
         }
 
         public void Causes(DomainEvent<IDomainEventEntity> @event)
