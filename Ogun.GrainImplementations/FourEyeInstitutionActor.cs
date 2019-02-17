@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Ogun.GrainInterfaces;
 using Ogun.GrainInterfaces.FourEyeModels;
+using Ogun.GrainInterfaces.FourEyeModels.Events;
 using Orleans.EventSourcing;
 using Orleans.Providers;
 

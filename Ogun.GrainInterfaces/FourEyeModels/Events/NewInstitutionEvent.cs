@@ -1,8 +1,7 @@
 ﻿using System;
-using Ogun.GrainInterfaces.FourEyeModels.Events;
 using Orleans.Concurrency;
 
-namespace Ogun.GrainInterfaces.FourEyeModels
+namespace Ogun.GrainInterfaces.FourEyeModels.Events
 {
     [Serializable, Immutable]
     public class NewInstitutionEvent<T> : DomainEvent<IDomainEventEntity> where T : NewInstitution

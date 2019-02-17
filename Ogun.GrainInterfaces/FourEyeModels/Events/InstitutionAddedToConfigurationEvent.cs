@@ -3,6 +3,7 @@ using Orleans.Concurrency;
 
 namespace Ogun.GrainInterfaces.FourEyeModels.Events
 {
+
     [Serializable, Immutable]
     public class InstitutionAddedToConfigurationEvent
     {
