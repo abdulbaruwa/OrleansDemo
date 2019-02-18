@@ -6,7 +6,7 @@ namespace Ogun.GrainInterfaces.FourEyeModels
 {
     public class FourEyeActionConfiguration
     {
-        public List<DomainEvent<IDomainEventEntity>> Changes { get; set; }
+        public HashSet<DomainEvent<IDomainEventEntity>> Changes { get; set; }
         public Guid Id { get; set; }
         public string Name { get; private set; }
         public HashSet<Guid> Approvers { get; private set; }
@@ -14,27 +14,19 @@ namespace Ogun.GrainInterfaces.FourEyeModels
 
         public FourEyeActionConfiguration()
         {
-            Changes = new List<DomainEvent<IDomainEventEntity>>();
+            Changes = new HashSet<DomainEvent<IDomainEventEntity>>();
             Approvers = new HashSet<Guid>();
         }
 
         public void Causes(DomainEvent<IDomainEventEntity> @event)
         {
-            AddDomainEvent(@event);
-            Apply(@event);
+            if (Apply(@event))
+            {
+                AddDomainEvent(@event);
+            }
         }
 
-        private void Apply(DomainEvent<IDomainEventEntity> @event)
-        {
-            When((dynamic) @event);
-        }
-
-        private void AddDomainEvent(DomainEvent<IDomainEventEntity> @event)
-        {
-            Changes.Add(@event);
-        }
-
-        public void When(UserAddedToConfigurationEvent @event)
+        public bool When(UserAddedToConfigurationEvent @event)
         {
             if (Approvers == null)
             {
@@ -42,9 +34,10 @@ namespace Ogun.GrainInterfaces.FourEyeModels
             }
 
             Approvers.Add(@event.Id);
+            return true;
         }
 
-        public void When(InstitutionAddedToConfigurationEvent @event)
+        public bool When(InstitutionAddedToConfigurationEvent @event)
         {
             if (Institutions == null)
             {
@@ -52,15 +45,30 @@ namespace Ogun.GrainInterfaces.FourEyeModels
             }
 
             Institutions.Add(@event.Id);
+            return true;
         }
 
-        public void When(NewFourEyeConfigurationEvent<NewFourEyeConfiguration> @event)
+        public bool When(NewFourEyeConfigurationEvent<NewFourEyeConfiguration> @event)
         {
+            if (!string.IsNullOrEmpty(Name)) return false;
             if (@event.Event is NewFourEyeConfiguration eventBody)
             {
                 Name = eventBody.Name;
                 Id = @eventBody.Id;
+                return true;
             }
+
+            return false;
+        }
+
+        private bool Apply(DomainEvent<IDomainEventEntity> @event)
+        {
+            return When((dynamic) @event);
+        }
+
+        private void AddDomainEvent(DomainEvent<IDomainEventEntity> @event)
+        {
+            Changes.Add(@event);
         }
     }
 }
