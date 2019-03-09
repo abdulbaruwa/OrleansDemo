@@ -4,18 +4,15 @@ using Ogun.GrainInterfaces.FourEyeModels.Events;
 
 namespace Ogun.GrainInterfaces.FourEyeModels
 {
-    public class FourEyeActionConfiguration
+    public class FourEyeAction
     {
         public Guid Id { get; set; }
         public string Name { get; private set; }
-        public HashSet<Guid> Approvers { get; private set; }
-        public HashSet<Guid> Institutions { get; private set; }
         public HashSet<DomainEvent<IDomainEventEntity>> Changes { get; set; }
 
-        public FourEyeActionConfiguration()
+        public FourEyeAction()
         {
             Changes = new HashSet<DomainEvent<IDomainEventEntity>>();
-            Approvers = new HashSet<Guid>();
         }
 
         public void Causes(DomainEvent<IDomainEventEntity> @event)
@@ -26,32 +23,10 @@ namespace Ogun.GrainInterfaces.FourEyeModels
             }
         }
 
-        public bool When(UserAddedToConfigurationEvent @event)
-        {
-            if (Approvers == null)
-            {
-                Approvers = new HashSet<Guid>();
-            }
-
-            Approvers.Add(@event.Id);
-            return true;
-        }
-
-        public bool When(InstitutionAddedToConfigurationEvent @event)
-        {
-            if (Institutions == null)
-            {
-                Institutions = new HashSet<Guid>();
-            }
-
-            Institutions.Add(@event.Id);
-            return true;
-        }
-
-        public bool When(NewFourEyeConfigurationEvent<NewFourEyeConfiguration> @event)
+        private bool When(NewFourEyeActionEvent<NewFourEyeAction> @event)
         {
             if (!string.IsNullOrEmpty(Name)) return false;
-            if (@event.Event is NewFourEyeConfiguration eventBody)
+            if (@event.Event is NewFourEyeAction eventBody)
             {
                 Name = eventBody.Name;
                 Id = @eventBody.Id;

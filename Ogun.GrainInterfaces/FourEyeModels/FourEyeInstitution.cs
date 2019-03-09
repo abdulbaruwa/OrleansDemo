@@ -14,10 +14,10 @@ namespace Ogun.GrainInterfaces.FourEyeModels
     /// </summary>
     public class FourEyeInstitution
     {
-        public List<DomainEvent<IDomainEventEntity>> Changes { get; set; }
+        public List<DomainEvent<IDomainEventEntity>> Changes { get; }
         public string Name { get; private set; }
         public Guid InstitutionId { get; private set; }
-        public HashSet<Guid> Approvers { get; private set; }
+        public HashSet<Guid> Approvers { get; }
 
         public FourEyeInstitution()
         {

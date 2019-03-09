@@ -17,6 +17,5 @@ namespace Ogun.GrainInterfaces.FourEyeModels
 
             Institutions.Add(@event.InstitutionId);
         }
-
     }
 }

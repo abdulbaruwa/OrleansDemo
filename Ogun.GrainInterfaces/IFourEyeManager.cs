@@ -10,5 +10,7 @@ namespace Ogun.GrainInterfaces
         Task<FourEyeRequest> GetAllRequestsAsync();
     }
 
-   
+    public class FourEyeRequest
+    {
+    }
 }
