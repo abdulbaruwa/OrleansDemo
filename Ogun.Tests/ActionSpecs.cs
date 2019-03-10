@@ -9,7 +9,6 @@ namespace Ogun.Tests
     {
         public class ApprovePendingActionEvent
         {
-
             [Fact]
             public void Should_Set_Action_Status()
             {
@@ -17,7 +16,8 @@ namespace Ogun.Tests
                 var eventId = Guid.NewGuid();
                 var actionConfigName = "Action_Test";
                 var actionConfigId = Guid.NewGuid();
-                var @event = new NewFourEyeActionEvent<NewFourEyeAction>(eventId, actionConfigName, DateTime.UtcNow, new NewFourEyeAction(actionConfigId, actionConfigName));
+                var @event = new NewFourEyeActionEvent<NewFourEyeAction>(eventId, actionConfigName, DateTime.UtcNow,
+                    new NewFourEyeAction(actionConfigId, actionConfigName));
                 sut.Causes(@event);
 
                 var approveEvent = new ApproveActionEvent<ApproveAction>(eventId, "approveAction", DateTime.UtcNow,
@@ -28,8 +28,8 @@ namespace Ogun.Tests
                 Assert.Equal(((ApproveAction) approveEvent.Event).Status, sut.Status);
             }
         }
-    }
-        public class NewActionRequestEvent
+
+        public class NewActionEvent
         {
             [Fact]
             public void Should_Set_Action_State_accordingly()
@@ -38,7 +38,8 @@ namespace Ogun.Tests
                 var eventId = Guid.NewGuid();
                 var actionConfigName = "Action_Test";
                 var actionConfigId = Guid.NewGuid();
-                var @event = new NewFourEyeActionEvent<NewFourEyeAction>(eventId, actionConfigName, DateTime.UtcNow, new NewFourEyeAction(actionConfigId, actionConfigName));
+                var @event = new NewFourEyeActionEvent<NewFourEyeAction>(eventId, actionConfigName, DateTime.UtcNow,
+                    new NewFourEyeAction(actionConfigId, actionConfigName));
                 sut.Causes(@event);
 
                 Assert.Contains(@event, sut.Changes);
@@ -68,3 +69,4 @@ namespace Ogun.Tests
             }
         }
     }
+}

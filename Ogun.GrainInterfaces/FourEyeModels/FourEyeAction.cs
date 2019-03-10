@@ -37,7 +37,6 @@ namespace Ogun.GrainInterfaces.FourEyeModels
             return false;
         }
 
-
         private bool When(ApproveActionEvent<ApproveAction> @event)
         {
             var eventBody = @event.Event as ApproveAction;
