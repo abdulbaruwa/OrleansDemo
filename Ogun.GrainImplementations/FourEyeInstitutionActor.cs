@@ -3,13 +3,14 @@ using System.Threading.Tasks;
 using Ogun.GrainInterfaces;
 using Ogun.GrainInterfaces.FourEyeModels;
 using Ogun.GrainInterfaces.FourEyeModels.Events;
+using Orleans;
 using Orleans.EventSourcing;
 using Orleans.Providers;
 
 namespace Ogun.GrainImplementations
 {
     [StorageProvider(ProviderName = "GloballySharedAzureAccount")]
-    public class FourEyeInstitutionActor : JournaledGrain<FourEyeInstitution>, IFourEyeInstitutionActor
+    public class FourEyeInstitutionActor : Grain<FourEyeInstitution>, IFourEyeInstitutionActor
     {
         private FourEyeInstitution GrainState { get; set; }
 
@@ -18,9 +19,10 @@ namespace Ogun.GrainImplementations
             if (GrainState == null)
             {
                 GrainState = new FourEyeInstitution();
-                var @event = new NewInstitutionEvent<NewInstitution>(Guid.Parse(this.IdentityString),
+                var @event = new NewInstitutionEvent<NewInstitution>(this.GetPrimaryKey(),
                     nameof(NewInstitution), DateTime.UtcNow, fourEyeRequest);
                 GrainState.Causes(@event);
+                base.WriteStateAsync();
             }
 
             return Task.CompletedTask;

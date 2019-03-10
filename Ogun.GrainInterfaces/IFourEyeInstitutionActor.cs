@@ -5,7 +5,7 @@ using Orleans;
 
 namespace Ogun.GrainInterfaces
 {
-    public interface IFourEyeInstitutionActor : IGrainWithIntegerKey
+    public interface IFourEyeInstitutionActor : IGrainWithGuidKey
     {
         Task NewAsync(NewInstitution fourEyeRequest);
     }
