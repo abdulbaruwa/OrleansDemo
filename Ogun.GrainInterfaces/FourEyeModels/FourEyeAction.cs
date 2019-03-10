@@ -9,6 +9,7 @@ namespace Ogun.GrainInterfaces.FourEyeModels
         public Guid Id { get; set; }
         public string Name { get; private set; }
         public HashSet<DomainEvent<IDomainEventEntity>> Changes { get; set; }
+        public bool Status { get; private set; } = false;
 
         public FourEyeAction()
         {
@@ -30,6 +31,20 @@ namespace Ogun.GrainInterfaces.FourEyeModels
             {
                 Name = eventBody.Name;
                 Id = @eventBody.Id;
+                return true;
+            }
+
+            return false;
+        }
+
+
+        private bool When(ApproveActionEvent<ApproveAction> @event)
+        {
+            var eventBody = @event.Event as ApproveAction;
+            if (eventBody == null || eventBody.Status == Status) return false;
+            if (eventBody is ApproveAction action)
+            {
+                Status = action.Status;
                 return true;
             }
 

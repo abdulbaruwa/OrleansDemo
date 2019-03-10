@@ -7,6 +7,28 @@ namespace Ogun.Tests
 {
     public class ActionSpecs
     {
+        public class ApprovePendingActionEvent
+        {
+
+            [Fact]
+            public void Should_Set_Action_Status()
+            {
+                var sut = new FourEyeAction();
+                var eventId = Guid.NewGuid();
+                var actionConfigName = "Action_Test";
+                var actionConfigId = Guid.NewGuid();
+                var @event = new NewFourEyeActionEvent<NewFourEyeAction>(eventId, actionConfigName, DateTime.UtcNow, new NewFourEyeAction(actionConfigId, actionConfigName));
+                sut.Causes(@event);
+
+                var approveEvent = new ApproveActionEvent<ApproveAction>(eventId, "approveAction", DateTime.UtcNow,
+                    new ApproveAction(Guid.NewGuid(), actionConfigId, true));
+
+                sut.Causes(approveEvent);
+                Assert.Contains(approveEvent, sut.Changes);
+                Assert.Equal(((ApproveAction) approveEvent.Event).Status, sut.Status);
+            }
+        }
+    }
         public class NewActionRequestEvent
         {
             [Fact]
@@ -46,4 +68,3 @@ namespace Ogun.Tests
             }
         }
     }
-}

@@ -26,7 +26,6 @@ namespace Ogun.GrainInterfaces.FourEyeModels.Events
         public Guid Id { get; }
     }
 
-
     [Serializable, Immutable]
     public class NewFourEyeActionEvent<T> : DomainEvent<IDomainEventEntity> where T : NewFourEyeAction
     {
@@ -47,5 +46,29 @@ namespace Ogun.GrainInterfaces.FourEyeModels.Events
 
         public string Name { get; }
         public Guid Id { get; }
+    }
+
+    [Serializable, Immutable]
+    public class ApproveActionEvent<T> : DomainEvent<IDomainEventEntity> where T : ApproveAction
+    {
+        public ApproveActionEvent(Guid id, string name, DateTime whenUtc, IDomainEventEntity @event) : base(id, name,
+            whenUtc, @event)
+        {
+        }
+    }
+
+    [Serializable, Immutable]
+    public class ApproveAction : IDomainEventEntity
+    {
+        public ApproveAction(Guid id, Guid actionId, bool status)
+        {
+            Id = id;
+            Status = status;
+            ActionId = actionId;
+        }
+
+        public bool Status { get; }
+        public Guid Id { get; }
+        public Guid ActionId { get; }
     }
 }
